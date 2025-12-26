@@ -35,6 +35,16 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
   import {
     getAuth,
+    const email = document.getElementById("email").value.trim().toLowerCase();
+const password = document.getElementById("password").value;
+if (!email || !email.includes("@") || !email.includes(".")) {
+  alert("Email tidak valid. Contoh: nama@gmail.com");
+  return;
+}
+if (!password) {
+  alert("Password wajib diisi.");
+  return;
+}
     signInWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup,
@@ -51,7 +61,7 @@
     appId: "1:106832025906:web:b5a5f8b95bc77513c95f2b",
     measurementId: "G-CTF9NQJ08K"
   };
-
+ 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
@@ -106,10 +116,6 @@
       </form>
     </div>
   </main>
-  <script src="assets/js/app.js">
-    const email = document.getElementById("email").value.trim().toLowerCase();
-const password = document.getElementById("password").value;
-
-  </script>
+  <script src="assets/js/app.js"> </script>
 </body>
 </html>
