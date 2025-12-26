@@ -6,66 +6,7 @@
   <title>Dashboard — Guntur Gunawan</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<!--<script>
-  const loggedIn = localStorage.getItem("loggedIn") === "1";
-  const role = localStorage.getItem("role");
-  const allowed = ["admin", "superadmin"];
 
-  if (!loggedIn || !allowed.includes(role)) 
-  { alert("Akses ditolak. Silakan login dulu.");
-    window.location.href = "login.html";
-    }
-</script>-->
-<p class="muted">Login sebagai: <b id="whoami">...</b></p>
-<button class="btn btn--ghost" id="logoutBtn">Logout</button>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-
-  const firebaseConfig = {
-   apiKey: "AIzaSyDmwnBjJM2poGPPiWcSxoK23enuFycCcdI",
-    authDomain: "gunturg1311-4121f.firebaseapp.com",
-    projectId: "gunturg1311-4121f",
-    storageBucket: "gunturg1311-4121f.firebasestorage.app",
-    messagingSenderId: "106832025906",
-    appId: "1:106832025906:web:b5a5f8b95bc77513c95f2b",
-    measurementId: "G-CTF9NQJ08K"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "login.html";
-      return;
-    }
-    // tampilkan email user (opsional)
-    const el = document.getElementById("whoami");
-    if (el) el.textContent = user.email || "User";
-  });
-  const ADMINS = ["gunturg1311@gmail.com"];
-const SUPERADMINS = ["gunturg1311@gmail.com"];
-
-const email = (user.email || "").toLowerCase();
-const role = SUPERADMINS.includes(email) ? "superadmin"
-          : ADMINS.includes(email) ? "admin"
-          : "user";
-
-if (!["admin","superadmin"].includes(role)) {
-  alert("Akses ditolak (bukan admin).");
-  window.location.href = "index.html";
-}
-  // logout button (opsional)
-  document.getElementById("logoutBtn")?.addEventListener("click", async () => {
-    await signOut(auth);
-    window.location.href = "login.html";
-  });
-</script>
-<p class="muted">
-  Login sebagai: <b id="whoami">...</b>
-</p>
-<button class="btn btn--ghost" id="logoutBtn">Logout</button>
 <body>
   <header class="header">
     <div class="container header__inner">
@@ -76,7 +17,7 @@ if (!["admin","superadmin"].includes(role)) {
         <a class="active" href="dashboard.html">Dashboard</a>
       </nav>
       <div class="header__actions">
-        <a class="btn btn--ghost" href="index.html">Keluar (demo)</a>
+        <button class="btn btn--ghost" id="logoutBtn" type="button">Logout</button>
       </div>
     </div>
   </header>
@@ -84,7 +25,12 @@ if (!["admin","superadmin"].includes(role)) {
   <main class="section">
     <div class="container">
       <h1>Dashboard</h1>
-      <p class="muted">UI kurasi materi (approve/reject) untuk admin/moderator.</p>
+
+      <p class="muted">
+        Login sebagai: <b id="whoami">...</b>
+      </p>
+
+      <p class="muted" id="roleInfo"></p>
 
       <div class="grid grid--3">
         <div class="card card--padded">
@@ -117,19 +63,65 @@ if (!["admin","superadmin"].includes(role)) {
     </div>
   </footer>
 
-  <script src="assets/js/app.js"></script>
- 
- <!---<script>
-    window.initDashboardPage?.();
-  </script>
-  <script>
-  const loggedIn = localStorage.getItem("loggedIn") === "1";
-  const role = localStorage.getItem("role");
-  const allowed = ["admin", "superadmin"];
+  <!-- Firebase auth + role check -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-  if (!loggedIn || !allowed.includes(role)) {
-    alert("Akses ditolak. Silakan login sebagai admin/superadmin (demo).");
-    window.location.href = "login.html";  }
-</script>--->
+    const firebaseConfig = {
+      apiKey: "AIzaSyDmwnBjJM2poGPPiWcSxoK23enuFycCcdI",
+      authDomain: "gunturg1311-4121f.firebaseapp.com",
+      projectId: "gunturg1311-4121f",
+      storageBucket: "gunturg1311-4121f.firebasestorage.app",
+      messagingSenderId: "106832025906",
+      appId: "1:106832025906:web:b5a5f8b95bc77513c95f2b",
+      measurementId: "G-CTF9NQJ08K"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // whitelist role (MVP)
+    const ADMINS = ["gunturg1311@gmail.com"];
+    const SUPERADMINS = ["gunturg1311@gmail.com"];
+
+    onAuthStateChanged(auth, (user) => {
+      // 1) belum login
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const email = (user.email || "").toLowerCase();
+
+      // 2) tentukan role
+      const role =
+        SUPERADMINS.includes(email) ? "superadmin" :
+        ADMINS.includes(email) ? "admin" :
+        "user";
+
+      // 3) blok kalau bukan admin/superadmin
+      if (!["admin", "superadmin"].includes(role)) {
+        alert("Akses ditolak (bukan admin).");
+        window.location.href = "index.html";
+        return;
+      }
+
+      // 4) tampilkan info
+      const who = document.getElementById("whoami");
+      if (who) who.textContent = email;
+
+      const roleInfo = document.getElementById("roleInfo");
+      if (roleInfo) roleInfo.textContent = `Role: ${role}`;
+    });
+
+    // logout
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    });
+  </script>
+
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
