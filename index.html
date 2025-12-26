@@ -6,6 +6,124 @@
     <title>Guntur Gunawan</title>
 </head>
 <body>
-    
-</body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">EduShare</a>
+
+      <nav class="nav">
+        <a href="materi.html">Materi</a>
+        <a href="upload.html">Upload</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+
+      <div class="header__actions">
+        <a class="btn btn--ghost" href="login.html">Masuk</a>
+        <a class="btn btn--primary" href="register.html">Daftar</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <h1>Bagikan materi, catatan, dan video pembelajaran — rapi, cepat, dan mudah dicari.</h1>
+          <p class="muted">
+            Platform sederhana untuk komunitas belajar: upload materi, kurasi kategori, dan diskusi singkat.
+          </p>
+
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="upload.html">Upload Materi</a>
+            <a class="btn btn--ghost" href="materi.html">Jelajahi Materi</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat__num" id="statMateri">120+</div>
+              <div class="stat__label">Materi</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num" id="statKategori">18</div>
+              <div class="stat__label">Kategori</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num" id="statKontributor">45</div>
+              <div class="stat__label">Kontributor</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card--padded">
+          <h3>Cari materi sekarang</h3>
+          <p class="muted">Gunakan kata kunci + filter kategori.</p>
+
+          <form class="searchbox" action="materi.html" method="GET">
+            <input name="q" type="search" placeholder="contoh: Laravel dasar, jaringan fiber, matematika..." />
+            <select name="cat">
+              <option value="">Semua kategori</option>
+              <option value="pemrograman">Pemrograman</option>
+              <option value="jaringan">Jaringan</option>
+              <option value="desain">Desain</option>
+              <option value="bisnis">Bisnis</option>
+            </select>
+            <button class="btn btn--primary" type="submit">Cari</button>
+          </form>
+
+          <div class="chips">
+            <a class="chip" href="materi.html?tag=laravel">#laravel</a>
+            <a class="chip" href="materi.html?tag=python">#python</a>
+            <a class="chip" href="materi.html?tag=uiux">#uiux</a>
+            <a class="chip" href="materi.html?tag=network">#network</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Materi terbaru</h2>
+          <a class="link" href="materi.html">Lihat semua →</a>
+        </div>
+
+        <div class="grid" id="latestGrid"></div>
+      </div>
+    </section>
+
+    <section class="section section--muted">
+      <div class="container">
+        <h2>Kenapa EduShare?</h2>
+        <div class="grid grid--3">
+          <div class="card card--padded">
+            <h3>Rapi</h3>
+            <p class="muted">Koleksi materi berbasis kategori, tag, dan tipe konten.</p>
+          </div>
+          <div class="card card--padded">
+            <h3>Cepat dicari</h3>
+            <p class="muted">Search + filter untuk menemukan materi dalam detik.</p>
+          </div>
+          <div class="card card--padded">
+            <h3>Kolaboratif</h3>
+            <p class="muted">Kontributor bisa upload dan admin bisa kurasi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <strong>EduShare</strong>
+        <div class="muted">Media sharing pembelajaran.</div>
+      </div>
+      <div class="muted">© <span id="year"></span> EduShare</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    // render materi terbaru di homepage
+    window.renderLatest?.("latestGrid", 6);
+  </script>
 </html>
