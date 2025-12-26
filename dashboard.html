@@ -6,6 +6,16 @@
   <title>Dashboard — Guntur Gunawan</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
+<script>
+  const loggedIn = localStorage.getItem("loggedIn") === "1";
+  const role = localStorage.getItem("role");
+  const allowed = ["admin", "superadmin"];
+
+  if (!loggedIn || !allowed.includes(role)) {
+    alert("Akses ditolak. Silakan login dulu.");
+    window.location.href = "login.html";
+  }
+</script>
 <body>
   <header class="header">
     <div class="container header__inner">
@@ -68,11 +78,7 @@
 
   if (!loggedIn || !allowed.includes(role)) {
     alert("Akses ditolak. Silakan login sebagai admin/superadmin (demo).");
-    window.location.href = "login.html";
-  }
-   const role = localStorage.getItem("role") || "guest";
-  const h1 = document.querySelector("h1");
-  if (h1) h1.insertAdjacentHTML("afterend", `<p class="muted">Role: <b>${role}</b></p>`);
+    window.location.href = "login.html";  }
 </script>
 </body>
 </html>

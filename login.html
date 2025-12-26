@@ -6,6 +6,28 @@
   <title>Masuk — Guntur Gunawan</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
+<script>
+  document.getElementById("loginForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const pass = document.getElementById("password").value;
+
+    // akun demo
+    const accounts = [
+      { email: "gunturg1311@gmail.com", pass: "SuperAdmin123!", role: "superadmin" },
+      { email: "gunturg1311@gmail.com",      pass: "Admin123!",      role: "admin" },
+    ];
+
+    const found = accounts.find(a => a.email === email && a.pass === pass);
+    if (!found) return alert("Email / password salah (demo).");
+
+    localStorage.setItem("loggedIn", "1");
+    localStorage.setItem("role", found.role);
+
+    // arahkan
+    window.location.href = "dashboard.html";
+  });
+</script>
 <body>
   <main class="auth">
     <div class="card card--padded auth__card">
@@ -28,28 +50,5 @@
     </div>
   </main>
   <script src="assets/js/app.js"></script>
-  <script>
-  document.getElementById("loginForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value.trim().toLowerCase();
-    const pass = document.getElementById("password").value;
-
-    // akun demo
-    const accounts = [
-      { email: "gunturg1311@gmail.com", pass: "SuperAdmin123!", role: "superadmin" },
-      { email: "gunturg1311@gmail.com",      pass: "Admin123!",      role: "admin" },
-    ];
-
-    const found = accounts.find(a => a.email === email && a.pass === pass);
-    if (!found) return alert("Email / password salah (demo).");
-
-    localStorage.setItem("loggedIn", "1");
-    localStorage.setItem("role", found.role);
-
-    // arahkan
-    window.location.href = "dashboard.html";
-  });
-</script>
-
 </body>
 </html>
