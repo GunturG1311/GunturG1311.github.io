@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Materi — EduShare</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">EduShare</a>
+      <nav class="nav">
+        <a class="active" href="materi.html">Materi</a>
+        <a href="upload.html">Upload</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <div class="header__actions">
+        <a class="btn btn--ghost" href="login.html">Masuk</a>
+        <a class="btn btn--primary" href="register.html">Daftar</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="section__head">
+        <h1>Daftar Materi</h1>
+        <div class="muted">Cari, filter, dan temukan materi pembelajaran.</div>
+      </div>
+
+      <div class="filters card card--padded">
+        <div class="filters__row">
+          <input id="q" type="search" placeholder="Cari judul / ringkasan..." />
+          <select id="cat">
+            <option value="">Semua kategori</option>
+            <option value="pemrograman">Pemrograman</option>
+            <option value="jaringan">Jaringan</option>
+            <option value="desain">Desain</option>
+            <option value="bisnis">Bisnis</option>
+          </select>
+          <select id="type">
+            <option value="">Semua tipe</option>
+            <option value="artikel">Artikel</option>
+            <option value="video">Video</option>
+            <option value="pdf">PDF</option>
+          </select>
+          <button class="btn btn--primary" id="apply">Terapkan</button>
+          <button class="btn btn--ghost" id="reset">Reset</button>
+        </div>
+
+        <div class="filters__row">
+          <div class="muted">Tag cepat:</div>
+          <div class="chips">
+            <button class="chip chip-btn" data-tag="laravel">#laravel</button>
+            <button class="chip chip-btn" data-tag="python">#python</button>
+            <button class="chip chip-btn" data-tag="network">#network</button>
+            <button class="chip chip-btn" data-tag="uiux">#uiux</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section__head" style="margin-top:16px;">
+        <div class="muted" id="countInfo"></div>
+        <div class="sort">
+          <label class="muted" for="sort">Urutkan:</label>
+          <select id="sort">
+            <option value="newest">Terbaru</option>
+            <option value="popular">Terpopuler</option>
+            <option value="az">A–Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid" id="materiGrid"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="muted">© <span id="year"></span> EduShare</div>
+      <a class="link" href="index.html">Kembali ke Home</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    window.initMateriPage?.();
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daftar — EduShare</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <main class="auth">
+    <div class="card card--padded auth__card">
+      <a class="brand" href="index.html">EduShare</a>
+      <h1>Daftar</h1>
+
+      <form class="form" onsubmit="event.preventDefault(); alert('Demo daftar. Hubungkan ke backend untuk produksi.');">
+        <div class="form__row">
+          <label>Nama</label>
+          <input required placeholder="Nama lengkap" />
+        </div>
+        <div class="form__row">
+          <label>Email</label>
+          <input type="email" required placeholder="nama@email.com" />
+        </div>
+        <div class="form__row">
+          <label>Password</label>
+          <input type="password" required placeholder="••••••••" />
+        </div>
+
+        <button class="btn btn--primary" type="submit">Buat Akun</button>
+        <p class="muted">Sudah punya akun? <a class="link" href="login.html">Masuk</a></p>
+      </form>
+    </div>
+  </main>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

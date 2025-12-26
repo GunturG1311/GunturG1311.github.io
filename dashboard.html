@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — EduShare</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">EduShare</a>
+      <nav class="nav">
+        <a href="materi.html">Materi</a>
+        <a href="upload.html">Upload</a>
+        <a class="active" href="dashboard.html">Dashboard</a>
+      </nav>
+      <div class="header__actions">
+        <a class="btn btn--ghost" href="index.html">Keluar (demo)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Dashboard</h1>
+      <p class="muted">UI kurasi materi (approve/reject) untuk admin/moderator.</p>
+
+      <div class="grid grid--3">
+        <div class="card card--padded">
+          <div class="muted">Menunggu persetujuan</div>
+          <div class="kpi">12</div>
+        </div>
+        <div class="card card--padded">
+          <div class="muted">Total materi</div>
+          <div class="kpi">120</div>
+        </div>
+        <div class="card card--padded">
+          <div class="muted">Kontributor</div>
+          <div class="kpi">45</div>
+        </div>
+      </div>
+
+      <div class="card card--padded" style="margin-top:16px;">
+        <div class="section__head">
+          <h2>Antrian Materi</h2>
+          <div class="muted">Klik untuk meninjau</div>
+        </div>
+        <div class="table" id="queueTable"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="muted">© <span id="year"></span> EduShare</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    window.initDashboardPage?.();
+  </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Upload Materi — EduShare</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">EduShare</a>
+      <nav class="nav">
+        <a href="materi.html">Materi</a>
+        <a class="active" href="upload.html">Upload</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <div class="header__actions">
+        <a class="btn btn--ghost" href="login.html">Masuk</a>
+        <a class="btn btn--primary" href="register.html">Daftar</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Upload Materi</h1>
+      <p class="muted">Ini template UI. Untuk produksi, sambungkan ke backend (Laravel / Node / Django).</p>
+
+      <form class="card card--padded form" id="uploadForm">
+        <div class="form__row">
+          <label>Judul</label>
+          <input required name="title" placeholder="Contoh: Dasar Laravel untuk Pemula" />
+        </div>
+
+        <div class="form__row">
+          <label>Ringkasan</label>
+          <textarea required name="summary" rows="4" placeholder="Jelaskan singkat isi materi..."></textarea>
+        </div>
+
+        <div class="form__grid">
+          <div class="form__row">
+            <label>Kategori</label>
+            <select required name="category">
+              <option value="pemrograman">Pemrograman</option>
+              <option value="jaringan">Jaringan</option>
+              <option value="desain">Desain</option>
+              <option value="bisnis">Bisnis</option>
+            </select>
+          </div>
+
+          <div class="form__row">
+            <label>Tipe</label>
+            <select required name="type">
+              <option value="artikel">Artikel</option>
+              <option value="video">Video</option>
+              <option value="pdf">PDF</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <label>Tag (pisahkan dengan koma)</label>
+          <input name="tags" placeholder="contoh: laravel, php, web" />
+        </div>
+
+        <div class="form__row">
+          <label>Link materi (opsional)</label>
+          <input name="url" placeholder="https://..." />
+        </div>
+
+        <div class="form__row">
+          <label>Upload file (opsional)</label>
+          <input type="file" name="file" />
+          <div class="muted" style="font-size: 13px; margin-top:6px;">
+            Untuk hosting statis, file upload belum tersimpan. Butuh backend/storage.
+          </div>
+        </div>
+
+        <div class="form__actions">
+          <button class="btn btn--primary" type="submit">Simpan (Demo)</button>
+          <a class="btn btn--ghost" href="materi.html">Batal</a>
+        </div>
+
+        <div class="toast" id="toast" hidden></div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="muted">© <span id="year"></span> EduShare</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    window.initUploadPage?.();
+  </script>
+</body>
+</html>

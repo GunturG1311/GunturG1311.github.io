@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detail Materi — EduShare</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">EduShare</a>
+      <nav class="nav">
+        <a href="materi.html">Materi</a>
+        <a href="upload.html">Upload</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <div class="header__actions">
+        <a class="btn btn--ghost" href="login.html">Masuk</a>
+        <a class="btn btn--primary" href="register.html">Daftar</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <a class="link" href="materi.html">← Kembali</a>
+
+      <div class="detail card card--padded" id="detail"></div>
+
+      <div class="section__head" style="margin-top:20px;">
+        <h2>Materi terkait</h2>
+        <a class="link" href="materi.html">Lihat semua →</a>
+      </div>
+      <div class="grid" id="relatedGrid"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="muted">© <span id="year"></span> EduShare</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    window.initDetailPage?.();
+  </script>
+</body>
+</html>
