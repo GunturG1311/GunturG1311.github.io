@@ -6,95 +6,7 @@
   <title>Masuk — Guntur Gunawan</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<!--<script>
-  document.getElementById("loginForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value.trim().toLowerCase();
-    const pass = document.getElementById("password").value;
 
-    // akun demo
-    const accounts = [
-      { email: "gunturg1311@gmail.com", pass: "SuperAdmin123!", role: "superadmin" },
-      { email: "gunturg1311@gmail.com",      pass: "Admin123!",      role: "admin" },
-    ];
-
-    const found = accounts.find(a => a.email === email && a.pass === pass);
-    if (!found) return alert("Email / password salah (demo).");
-
-    localStorage.setItem("loggedIn", "1");
-    localStorage.setItem("role", found.role);
-
-    // arahkan
-    window.location.href = "dashboard.html";
-  });
-</script>-->
-<input id="email" type="email" required>
-<input id="password" type="password" required>
-<button class="btn btn--ghost" type="button" id="googleBtn">Masuk dengan Google</button>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-  import {
-    getAuth,
-    const email = document.getElementById("email").value.trim().toLowerCase();
-const password = document.getElementById("password").value;
-if (!email || !email.includes("@") || !email.includes(".")) {
-  alert("Email tidak valid. Contoh: nama@gmail.com");
-  return;
-}
-if (!password) {
-  alert("Password wajib diisi.");
-  return;
-}
-    signInWithEmailAndPassword,
-    GoogleAuthProvider,
-    signInWithPopup,
-    onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-
-  // 1) GANTI ini dengan config dari Firebase Console
-  const firebaseConfig = {
-    apiKey: "AIzaSyDmwnBjJM2poGPPiWcSxoK23enuFycCcdI",
-    authDomain: "gunturg1311-4121f.firebaseapp.com",
-    projectId: "gunturg1311-4121f",
-    storageBucket: "gunturg1311-4121f.firebasestorage.app",
-    messagingSenderId: "106832025906",
-    appId: "1:106832025906:web:b5a5f8b95bc77513c95f2b",
-    measurementId: "G-CTF9NQJ08K"
-  };
- 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  // kalau sudah login, arahkan ke dashboard
-  onAuthStateChanged(auth, (user) => {
-    if (user) window.location.href = "dashboard.html";
-  });
-
-  // Email/Password login
-  document.getElementById("loginForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      window.location.href = "dashboard.html";
-    } catch (err) {
-      alert(err.message);
-    }
-  });
-
-  // Google Login (opsional)
-  document.getElementById("googleBtn")?.addEventListener("click", async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-      window.location.href = "dashboard.html";
-    } catch (err) {
-      alert(err.message);
-    }
-  });
-</script>
 <body>
   <main class="auth">
     <div class="card card--padded auth__card">
@@ -104,18 +16,85 @@ if (!password) {
       <form class="form" id="loginForm">
         <div class="form__row">
           <label>Email</label>
-          <input type="email" required placeholder="nama@email.com" />
+          <input id="email" type="email" required placeholder="nama@email.com" autocomplete="email" />
         </div>
+
         <div class="form__row">
           <label>Password</label>
-          <input type="password" required placeholder="••••••••" />
+          <input id="password" type="password" required placeholder="••••••••" autocomplete="current-password" />
         </div>
 
         <button class="btn btn--primary" type="submit">Masuk</button>
-        <p class="muted">Belum punya akun? <a class="link" href="register.html">Daftar</a></p>
+        <button class="btn btn--ghost" type="button" id="googleBtn">Masuk dengan Google</button>
+
+        <p class="muted" style="margin-top:10px;">
+          Belum punya akun? <a class="link" href="register.html">Daftar</a>
+        </p>
       </form>
     </div>
   </main>
-  <script src="assets/js/app.js"> </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      GoogleAuthProvider,
+      signInWithPopup,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    // Firebase config kamu (sudah benar)
+    const firebaseConfig = {
+      apiKey: "AIzaSyDmwnBjJM2poGPPiWcSxoK23enuFycCcdI",
+      authDomain: "gunturg1311-4121f.firebaseapp.com",
+      projectId: "gunturg1311-4121f",
+      storageBucket: "gunturg1311-4121f.firebasestorage.app",
+      messagingSenderId: "106832025906",
+      appId: "1:106832025906:web:b5a5f8b95bc77513c95f2b",
+      measurementId: "G-CTF9NQJ08K"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Jika sudah login, langsung ke dashboard
+    onAuthStateChanged(auth, (user) => {
+      if (user) window.location.href = "dashboard.html";
+    });
+
+    // Login Email/Password
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const password = document.getElementById("password").value;
+
+      // validasi lokal biar jelas
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!emailOk) return alert("Email tidak valid. Contoh: nama@gmail.com");
+      if (!password) return alert("Password wajib diisi.");
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = "dashboard.html";
+      } catch (err) {
+        alert(err.code || err.message);
+      }
+    });
+
+    // Login Google
+    document.getElementById("googleBtn").addEventListener("click", async () => {
+      try {
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(auth, provider);
+        window.location.href = "dashboard.html";
+      } catch (err) {
+        alert(err.code || err.message);
+      }
+    });
+  </script>
+
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
