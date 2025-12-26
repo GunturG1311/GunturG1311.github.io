@@ -6,7 +6,7 @@
   <title>Masuk — Guntur Gunawan</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<script>
+<!--<script>
   document.getElementById("loginForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const email = document.getElementById("email").value.trim().toLowerCase();
@@ -26,6 +26,60 @@
 
     // arahkan
     window.location.href = "dashboard.html";
+  });
+</script>-->
+<input id="email" type="email" required>
+<input id="password" type="password" required>
+<button class="btn btn--ghost" type="button" id="googleBtn">Masuk dengan Google</button>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+  // 1) GANTI ini dengan config dari Firebase Console
+  const firebaseConfig = {
+    apiKey: "ISI_API_KEY",
+    authDomain: "ISI_AUTH_DOMAIN",
+    projectId: "ISI_PROJECT_ID",
+    appId: "ISI_APP_ID",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // kalau sudah login, arahkan ke dashboard
+  onAuthStateChanged(auth, (user) => {
+    if (user) window.location.href = "dashboard.html";
+  });
+
+  // Email/Password login
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      window.location.href = "dashboard.html";
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  // Google Login (opsional)
+  document.getElementById("googleBtn")?.addEventListener("click", async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      window.location.href = "dashboard.html";
+    } catch (err) {
+      alert(err.message);
+    }
   });
 </script>
 <body>
