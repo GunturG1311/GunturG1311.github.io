@@ -11,10 +11,10 @@
   const role = localStorage.getItem("role");
   const allowed = ["admin", "superadmin"];
 
-  if (!loggedIn || !allowed.includes(role)) {
-    alert("Akses ditolak. Silakan login dulu.");
+  if (!loggedIn || !allowed.includes(role)) 
+  { alert("Akses ditolak. Silakan login dulu.");
     window.location.href = "login.html";
-  }
+    }
 </script>
 <body>
   <header class="header">
@@ -68,7 +68,8 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
+ 
+ <!---<script>
     window.initDashboardPage?.();
   </script>
   <script>
@@ -79,6 +80,6 @@
   if (!loggedIn || !allowed.includes(role)) {
     alert("Akses ditolak. Silakan login sebagai admin/superadmin (demo).");
     window.location.href = "login.html";  }
-</script>
+</script>--->
 </body>
 </html>
